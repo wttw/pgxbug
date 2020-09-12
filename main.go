@@ -78,6 +78,9 @@ func test(db *pgx.Conn) {
 	log.Print("second select")
 	rows, err = tx.Query(ctx, `select bar, idx from foo where bar = $2 and idx >= $1 order by idx`, 0, "baz")
 
+	log.Printf("err=%v", err)
+	log.Printf("rows.Err()=%v", rows.Err())
+
 	if err != nil {
 		log.Printf("select from foo err=%v\n", err)
 		return
